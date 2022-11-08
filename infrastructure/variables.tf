@@ -6,9 +6,9 @@ variable "lambda_function_name" {
   default = "ExecutaEMR"
 }
 
-# variable "key_pair_name" {
-#   default = "adriano-teste"
-# }
+variable "key_pair_name" {
+  default = "adriano-teste"
+}
 
 # variable "airflow_subnet_id" {
 #   default = "subnet-4cef5427"
