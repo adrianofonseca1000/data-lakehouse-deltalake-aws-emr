@@ -7,7 +7,7 @@ spark = (
     .getOrCreate()
 )
 
-# Ler os dados do enem 2019
+# Ler os dados do enem 2020
 enem = (
     spark
     .read
@@ -15,7 +15,7 @@ enem = (
     .option("header", True)
     .option("inferSchema", True)
     .option("delimiter", ";")
-    .load("s3://datalake-adriano-tf/raw-data/enem/")
+    .load("s3://datalake-adriano-523003372975/raw-data/data/MICRODADOS_ENEM_2020.csv")
 )
 
 
@@ -25,5 +25,5 @@ enem = (
     .mode("overwrite")
     .format("parquet")
     .partitionBy("year")
-    .save("s3://datalake-adriano-tf/staging/enem")
+    .save("s3://datalake-adriano-523003372975/staging/enem")
 )

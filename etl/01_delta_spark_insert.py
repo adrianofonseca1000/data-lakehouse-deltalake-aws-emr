@@ -18,7 +18,7 @@ enem = (
     .option("inferSchema", True)
     .option("header", True)
     .option("delimiter", ";")
-    .load("s3://datalake-adriano-523003372975/raw-data/data")
+    .load("s3://datalake-adriano-523003372975/raw-data/data/MICRODADOS_ENEM_2020.csv")
 )
 
 # Escreve a tabela em staging em formato delta
@@ -29,5 +29,5 @@ print("Writing delta table...")
     .mode("overwrite")
     .format("delta")
     .partitionBy("year")
-    .save("s3://datalake-adriano-tf/staging-zone/enem")
+    .save("s3://datalake-adriano-tf/staging-zone/enem/")
 )
