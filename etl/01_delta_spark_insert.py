@@ -29,6 +29,6 @@ print("Writing delta table...")
     .write
     .mode("overwrite")
     .format("delta")
-    .partitionBy("year")
+    .partitionBy("SG_UF_PROVA")
     .save("s3://datalake-adriano-tf/staging-zone/enem")
 )
