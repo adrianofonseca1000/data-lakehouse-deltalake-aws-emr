@@ -18,7 +18,7 @@ enem = (
     .option("inferSchema", True)
     .option("header", True)
     .option("delimiter", ";")
-    .load("s3://datalake-adriano-tf/raw-data/enem")
+    .load("s3://datalake-adriano-523003372975/raw-data/data")
 )
 
 # Escreve a tabela em staging em formato delta
