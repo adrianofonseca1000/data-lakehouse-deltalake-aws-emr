@@ -10,12 +10,26 @@ logger = logging.getLogger('datalake_enem_small_upsert')
 logger.setLevel(logging.DEBUG)
 
 # Definicao da Spark Session
-spark = (SparkSession.builder.appName("DeltaExercise")
-    .config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0")
-    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
-    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
-    .getOrCreate()
-)
+spark = (
+            SparkSession.builder
+            .appName("DeltaExercise")
+            .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+            .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+            .config("spark.debug.maxToStringFields", "1000")
+            .config("spark.sql.sources.partitionOverwriteMode", "dynamic")
+            .config("spark.sql.session.timeZone", "UTC")
+            .enableHiveSupport()
+            .getOrCreate()
+        )
+
+
+# Código old
+# spark = (SparkSession.builder.appName("DeltaExercise")
+#     .config("spark.jars.packages", "io.delta:delta-core_2.12:1.0.0")
+#     .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+#     .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+#     .getOrCreate()
+# )
 
 
 logger.info("Importing delta.tables...")
@@ -25,7 +39,7 @@ from delta.tables import *
 logger.info("Produzindo novos dados...")
 enemnovo = (
     spark.read.format("delta")
-    .load("s3://datalake-adriano-tf/staging-zone/enem/")
+    .load("s3://datalake-adriano-tf/staging-zone/enem")
 )
 
 # Define algumas inscricoes (chaves) que serao alteradas
@@ -87,7 +101,7 @@ enemnovo = enemnovo.withColumn("NO_MUNICIPIO_RESIDENCIA", lit("NOVA CIDADE")).wi
 
 
 logger.info("Pega os dados do Enem velhos na tabela Delta...")
-enemvelho = DeltaTable.forPath(spark, "s3://datalake-adriano-tf/staging-zone/enem/")
+enemvelho = DeltaTable.forPath(spark, "s3://datalake-adriano-tf/staging-zone/enem")
 
 
 logger.info("Realiza o UPSERT...")
