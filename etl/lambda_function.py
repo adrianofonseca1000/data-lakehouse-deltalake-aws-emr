@@ -33,7 +33,7 @@ def handler(event, context):
                     'Ec2KeyName': 'adriano-teste',
                     'KeepJobFlowAliveWhenNoSteps': True,
                     'TerminationProtected': False,
-                    'Ec2SubnetId': 'subnet-1df20360'
+                    'Ec2SubnetId': 'subnet-032f038ce425f060e'
                 },
 
                 Applications=[
