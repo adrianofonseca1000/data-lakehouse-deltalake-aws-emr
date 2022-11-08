@@ -15,4 +15,3 @@ simulations_to_kinesis.py
 *.png
 *.ipynb
 /etl/*.py
-*.sh
