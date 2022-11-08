@@ -10,4 +10,3 @@ airflow_variables.json
 /infrastructure/kinesis.tf
 /airflow
 simulations_to_kinesis.py
-*.yaml
