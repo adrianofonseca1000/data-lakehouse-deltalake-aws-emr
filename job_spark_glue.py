@@ -1,4 +1,5 @@
 import sys
+from awsglue.transforms import *
 from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
 from awsglue.context import GlueContext
@@ -13,7 +14,7 @@ spark = glueContext.spark_session
 job = Job(glueContext)
 job.init(args['JOB_NAME'], args)
 
-# Ler os dados do enem 2019
+# Ler os dados enem 2020
 enem = (
     spark
     .read
@@ -21,16 +22,17 @@ enem = (
     .option("header", True)
     .option("inferSchema", True)
     .option("delimiter", ";")
-    .load("s3://datalake-adriano-tf/raw-data/enem/")
+    .load("s3://datalake-adriano-523003372975/raw-data/data/MICRODADOS_ENEM_2020.csv")
 )
 
-
-
+# Escrever os dados enem 2020 em formato Parquet no Datalake
 (
     enem
     .write
     .mode("overwrite")
     .format("parquet")
-    .partitionBy("year")
-    .save("s3://datalake-adriano-tf/staging/enem")
+    .partitionBy("SG_UF_PROVA")
+    .save("s3://datalake-adriano-523003372975/consumer-zone/")
 )
+
+job.commit()
