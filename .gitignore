@@ -13,4 +13,3 @@ simulations_to_kinesis.py
 *.yaml
 *.tf
 *.png
-*.ipynb
