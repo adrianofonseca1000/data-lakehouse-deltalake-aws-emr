@@ -12,4 +12,3 @@ airflow_variables.json
 simulations_to_kinesis.py
 *.yaml
 *.tf
-*.png
