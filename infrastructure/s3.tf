@@ -22,28 +22,33 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "datalake" {
 }
 
 
+# Datalake Stream
+resource "aws_s3_bucket" "stream" {
+  bucket = "adriano-streaming-bucket"
+  tags = {
+    IES   = "IGTI"
+    CURSO = "EDC"
+  }
+}
+
+resource "aws_s3_bucket_acl" "stream" {
+  bucket = aws_s3_bucket.stream.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "stream" {
+  bucket = aws_s3_bucket.stream.id
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+
 # Código old - Não funciona
 # resource "aws_s3_bucket" "dl" {
 #   bucket = "datalake-adriano-tf"
-#   acl    = "private"
-
-#   tags = {
-#     IES   = "IGTI",
-#     CURSO = "EDC"
-#   }
-
-#   server_side_encryption_configuration {
-#     rule {
-#       apply_server_side_encryption_by_default {
-#         sse_algorithm = "AES256"
-#       }
-#     }
-#   }
-# }
-
-
-# resource "aws_s3_bucket" "stream" {
-#   bucket = "adriano-streaming-bucket"
 #   acl    = "private"
 
 #   tags = {
