@@ -1,4 +1,4 @@
-# Imagem Ubuntu
+# Imagem Ubuntu EC2
 data "aws_ami" "ubuntu" {
   most_recent = true
 
