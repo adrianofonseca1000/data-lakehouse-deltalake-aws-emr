@@ -6,4 +6,3 @@ lambda_function_payload.zip
 airflow_variables.json
 /infrastructure/ec2.tf
 /airflow
-simulations_to_kinesis.py
