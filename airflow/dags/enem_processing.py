@@ -16,10 +16,10 @@ s3client = boto3.client("s3", aws_access_key_id=aws_access_key_id,
 
 # Usando a novíssima Taskflow API
 default_args = {
-    'owner': 'Neylson Crepalde',
+    'owner': 'Adriano Fonseca',
     "depends_on_past": False,
     "start_date": days_ago(2),
-    "email": ["airflow@airflow.com"],
+    "email": ["adriano.matias1000@gmail.com"],
     "email_on_failure": False,
     "email_on_retry": False
 }
@@ -59,7 +59,7 @@ def pipeline_enem():
                 'Ec2KeyName': 'adriano-teste',
                 'KeepJobFlowAliveWhenNoSteps': True,
                 'TerminationProtected': False,
-                'Ec2SubnetId': 'subnet-1df20360'
+                'Ec2SubnetId': 'subnet-032f038ce425f060e'
             },
 
             Applications=[{'Name': 'Spark'}],
