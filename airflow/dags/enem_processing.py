@@ -7,19 +7,19 @@ aws_access_key_id = Variable.get("aws_access_key_id")
 aws_secret_access_key = Variable.get("aws_secret_access_key")
 
 client = boto3.client("emr", region_name="us-east-2",
-                      aws_access_key_id=aws_access_key_id,
-                      aws_secret_access_key=aws_secret_access_key)
+                    aws_access_key_id=aws_access_key_id,
+                    aws_secret_access_key=aws_secret_access_key)
 
 s3client = boto3.client("s3", aws_access_key_id=aws_access_key_id,
-                        aws_secret_access_key=aws_secret_access_key)
+                          aws_secret_access_key=aws_secret_access_key)
 
 
 # Usando a novíssima Taskflow API
 default_args = {
-    'owner': 'Adriano Fonseca',
+    'owner': 'Neylson Crepalde',
     "depends_on_past": False,
     "start_date": days_ago(2),
-    "email": ["adriano.matias1000@gmail.com"],
+    "email": ["airflow@airflow.com"],
     "email_on_failure": False,
     "email_on_retry": False
 }
@@ -33,7 +33,7 @@ def pipeline_enem():
     @task
     def emr_process_enem_data():
         cluster_id = client.run_job_flow(
-            Name='EMR-enem',
+            Name='EMR-Enem',
             ServiceRole='EMR_DefaultRole',
             JobFlowRole='EMR_EC2_DefaultRole',
             VisibleToAllUsers=True,
