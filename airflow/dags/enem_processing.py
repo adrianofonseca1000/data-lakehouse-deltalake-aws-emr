@@ -33,7 +33,7 @@ def pipeline_enem():
     @task
     def emr_process_enem_data():
         cluster_id = client.run_job_flow(
-            Name='EMR-Ney-IGTI',
+            Name='EMR-Enem',
             ServiceRole='EMR_DefaultRole',
             JobFlowRole='EMR_EC2_DefaultRole',
             VisibleToAllUsers=True,
@@ -56,7 +56,7 @@ def pipeline_enem():
                         'InstanceCount': 1,
                     }
                 ],
-                'Ec2KeyName': 'ney-igti-teste',
+                'Ec2KeyName': 'adriano-teste',
                 'KeepJobFlowAliveWhenNoSteps': True,
                 'TerminationProtected': False,
                 'Ec2SubnetId': 'subnet-1df20360'
